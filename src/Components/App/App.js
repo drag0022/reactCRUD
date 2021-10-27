@@ -57,11 +57,11 @@ function App() {
 					<Route path="/" exact>
 						<Home />
 					</Route>
-					<Route path="/list">
+					<Route path="/list" exact>
 						<List colleagueList={colleagueList} />
 					</Route>
-					<Route path="/list/newEntry" exact>
-						<AddNew />
+					<Route path="/list/newEntry">
+						<AddNew colleagueList={colleagueList} />
 					</Route>
 					<Redirect to="/" />
 				</Switch>
