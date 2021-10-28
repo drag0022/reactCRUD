@@ -15,7 +15,6 @@ export default function AddNew(props) {
 	const [age, setAge] = useState(0);
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [gender, setGender] = useState('');
-
 	function addNewEntry(ev) {
 		ev.preventDefault();
 		colleagueList = [
@@ -30,9 +29,16 @@ export default function AddNew(props) {
 			},
 		];
 
+		//set a global bool set to false initially
+		//in addNewEntry(), turn it to async and and await for colleagueList to build.
+		// once it's build, set the bool to true
+		//check in return if bool is true, then it is saved and we can go to /lists
+		// if it's false, then we don't go to /lists and display loading
+
 		console.log(firstName);
 		console.log({ colleagueList });
 		localStorage.setItem('project01', JSON.stringify(colleagueList));
+		window.location.replace('/list');
 	}
 	return (
 		<>
@@ -80,8 +86,8 @@ export default function AddNew(props) {
 						}}
 						onChange={(ev) => setPhoneNumber(ev.target.value)}
 					/>
+					{/* render <List> on click */}
 					<Button variant="contained" color="success" type="submit">
-						{/* render <List> on click */}
 						<Typography variant="button">Add new +</Typography>
 					</Button>
 				</Stack>
