@@ -5,6 +5,7 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import cuid from 'cuid';
 export default function AddNew(props) {
@@ -28,8 +29,10 @@ export default function AddNew(props) {
 				id: cuid(),
 			},
 		];
+
 		console.log(firstName);
-		console.log(colleagueList);
+		console.log({ colleagueList });
+		localStorage.setItem('project01', JSON.stringify(colleagueList));
 	}
 	return (
 		<>
@@ -78,6 +81,7 @@ export default function AddNew(props) {
 						onChange={(ev) => setPhoneNumber(ev.target.value)}
 					/>
 					<Button variant="contained" color="success" type="submit">
+						{/* render <List> on click */}
 						<Typography variant="button">Add new +</Typography>
 					</Button>
 				</Stack>
