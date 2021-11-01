@@ -39,6 +39,10 @@ function App() {
 		localStorage.setItem('project01', JSON.stringify(colleagueList));
 	}
 
+	//wrap in useCallback
+	function updateListState() {
+		setColleagueList(JSON.parse(localStorage.getItem('project01')));
+	}
 	useEffect(() => {
 		//check local storage before fetching
 		if (!localStorage.getItem('project01')) {
@@ -55,10 +59,16 @@ function App() {
 			<main>
 				<Switch>
 					<Route path="/" exact>
-						<Home />
+						<List
+							colleagueList={colleagueList}
+							updateListState={updateListState}
+						/>
 					</Route>
 					<Route path="/list" exact>
-						<List colleagueList={colleagueList} />
+						<List
+							colleagueList={colleagueList}
+							updateListState={updateListState}
+						/>
 					</Route>
 					<Route path="/list/newEntry">
 						<AddNew colleagueList={colleagueList} />

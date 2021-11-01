@@ -1,51 +1,42 @@
-import './AddNew.css';
+import './Edit.css';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import TextField from '@mui/material/TextField';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import cuid from 'cuid';
-export default function AddNew(props) {
-	let colleagueList = props.colleagueList;
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [age, setAge] = useState(0);
-	const [phoneNumber, setPhoneNumber] = useState('');
-	const [gender, setGender] = useState('');
-	function addNewEntry(ev) {
-		ev.preventDefault();
-		colleagueList = [
-			...colleagueList,
-			{
-				firstName: firstName,
-				lastName: lastName,
-				age: age,
-				gender: gender,
-				phoneNumber: phoneNumber,
-				id: cuid(),
-			},
-		];
 
-		console.log(firstName);
-		console.log({ colleagueList });
+export default function Edit(props) {
+	let colleagueList = props.colleagueList;
+	let colleague = props.colleague;
+	const [firstName, setFirstName] = useState(colleague.firstName);
+	const [lastName, setLastName] = useState(colleague.lastName);
+	const [age, setAge] = useState(colleague.age);
+	const [phoneNumber, setPhoneNumber] = useState(colleague.phoneNumber);
+	const [gender, setGender] = useState(colleague.gender);
+	function editEntry(ev) {
+		console.log('editing entry');
+		ev.preventDefault();
+		console.log(colleague);
+		colleague.firstName = firstName;
+		colleague.lastName = lastName;
+		colleague.age = age;
+		colleague.phoneNumber = phoneNumber;
+		colleague.gender = gender;
 		localStorage.setItem('project01', JSON.stringify(colleagueList));
 		window.location.replace('/list');
+		//props.updateListState();
 	}
 	return (
 		<>
-			<Box
-				component="form"
-				onSubmit={addNewEntry}
-				noValidate
-				autoComplete="off"
-			>
-				<Stack direction="column" width="90vw" p={2}>
+			<Box component="form" onSubmit={editEntry} noValidate autoComplete="off">
+				<Stack direction="column" p={2}>
 					<TextField
 						className="newEntryText"
 						label="First Name"
@@ -63,6 +54,7 @@ export default function AddNew(props) {
 						sx={{
 							marginBottom: 1,
 						}}
+						value={lastName}
 						onChange={(ev) => setLastName(ev.target.value)}
 					/>
 					<TextField
@@ -72,6 +64,7 @@ export default function AddNew(props) {
 						sx={{
 							marginBottom: 1,
 						}}
+						value={age}
 						onChange={(ev) => setAge(ev.target.value)}
 					/>
 					<TextField
@@ -81,13 +74,14 @@ export default function AddNew(props) {
 						sx={{
 							marginBottom: 1,
 						}}
+						value={phoneNumber}
 						onChange={(ev) => setPhoneNumber(ev.target.value)}
 					/>
 					<FormControl component="fieldset">
 						<FormLabel component="legend">Gender</FormLabel>
 						<RadioGroup
 							aria-label="gender"
-							defaultValue="female"
+							defaultValue={gender}
 							name="radio-buttons-group"
 						>
 							<FormControlLabel
@@ -110,9 +104,21 @@ export default function AddNew(props) {
 							/>
 						</RadioGroup>
 					</FormControl>
-					<Button variant="contained" color="success" type="submit">
-						<Typography variant="button">Add new +</Typography>
-					</Button>
+					<Stack direction="row">
+						<Button variant="contained" color="success" type="submit">
+							<Typography variant="button">Save</Typography>
+						</Button>
+						<span className="divider"></span>
+						<Button
+							className="cancelButton"
+							variant="contained"
+							color="error"
+							type="button"
+							onClick={() => window.location.replace('/list')}
+						>
+							<Typography variant="button">Cancel</Typography>
+						</Button>
+					</Stack>
 				</Stack>
 			</Box>
 		</>
