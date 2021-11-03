@@ -1,6 +1,5 @@
 import './App.css';
 import NavBar from '../NavBar/NavBar';
-import Home from '../Home/Home';
 import List from '../List/List';
 import AddNew from '../AddNew/AddNew.js';
 import { useEffect, useState, useCallback } from 'react';
