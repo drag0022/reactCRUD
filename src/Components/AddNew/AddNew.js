@@ -18,6 +18,8 @@ export default function AddNew(props) {
 	const [age, setAge] = useState(0);
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [gender, setGender] = useState('');
+
+	//build a new object entry and append and id
 	function addNewEntry(ev) {
 		ev.preventDefault();
 		colleagueList = [
@@ -32,9 +34,10 @@ export default function AddNew(props) {
 			},
 		];
 
-		console.log(firstName);
-		console.log({ colleagueList });
+		//save to local storage
 		localStorage.setItem('project01', JSON.stringify(colleagueList));
+
+		//go back to main list page
 		window.location.replace('/list');
 	}
 	return (
@@ -45,7 +48,7 @@ export default function AddNew(props) {
 				noValidate
 				autoComplete="off"
 			>
-				<Stack direction="column" width="90vw" p={2}>
+				<Stack direction="column" p={2}>
 					<TextField
 						className="newEntryText"
 						label="First Name"

@@ -7,10 +7,18 @@ import { NavLink } from 'react-router-dom';
 export default function NavBar() {
 	return (
 		<>
-			<Box p={2}>
-				<Stack direction="row" justifyContent="space-evenly">
-					<img src="#" className="logo" alt="logo" />
-					<Typography variant="h4">List of Classmates</Typography>
+			<Box p={2} className="navContainer">
+				<Stack
+					direction="row"
+					justifyContent="space-evenly"
+					alignItems="center"
+				>
+					<img
+						src="https://i.ibb.co/BgnH27G/AC-WORDMARK-1-C-WHT.png"
+						className="logo"
+						alt="logo"
+					/>
+					<Typography variant="h5">List of Classmates</Typography>
 					<NavLink to="/list/newEntry">
 						<Button variant="contained" color="success">
 							<Typography variant="button">Add new +</Typography>

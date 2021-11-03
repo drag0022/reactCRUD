@@ -16,7 +16,7 @@ export default function Colleague(props) {
 	return (
 		<>
 			<Box>
-				<Stack direction="row">
+				<Stack direction="row" className="">
 					<img
 						src={imageUrl}
 						className="colleaguePic"
@@ -47,7 +47,7 @@ export default function Colleague(props) {
 						justifyContent="center"
 					>
 						<Button
-							variant="outlined"
+							variant={props.isEditToggled ? 'disabled' : 'outlined'}
 							onClick={() => {
 								props.onToggleEdit(colleague.id);
 							}}
@@ -55,6 +55,7 @@ export default function Colleague(props) {
 							<Typography variant="button">Edit Entry</Typography>
 						</Button>
 						<Button
+							variant={props.isEditToggled ? 'disabled' : 'outlined'}
 							color="error"
 							onClick={() => {
 								props.onDeleteColleague(colleague.id);
@@ -66,12 +67,15 @@ export default function Colleague(props) {
 				</Stack>
 				<Divider />
 				{props.isEditToggled ? (
-					<Edit
-						editToggled={props.isEditToggled}
-						updateListState={props.updateListState}
-						colleagueList={props.colleagueList}
-						colleague={colleague}
-					/>
+					<div className="editContainer">
+						<Edit
+							isEditToggled={props.isEditToggled}
+							setEditToggled={props.setEditToggled}
+							updateListState={props.updateListState}
+							colleagueList={props.colleagueList}
+							colleague={colleague}
+						/>
+					</div>
 				) : (
 					<></>
 				)}

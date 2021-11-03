@@ -3,3 +3,7 @@
 	margin: 0 auto;
 	align-items: center;
 }
+
+.listContainer > div:nth-child(2n) {
+	background-color: rgb(221, 231, 199);
+}

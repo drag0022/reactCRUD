@@ -20,10 +20,10 @@ export default function Edit(props) {
 	const [age, setAge] = useState(colleague.age);
 	const [phoneNumber, setPhoneNumber] = useState(colleague.phoneNumber);
 	const [gender, setGender] = useState(colleague.gender);
+
+	//build new object entry to replace the element to be edited
 	function editEntry(ev) {
-		console.log('editing entry');
 		ev.preventDefault();
-		console.log(colleague);
 		colleague.firstName = firstName;
 		colleague.lastName = lastName;
 		colleague.age = age;
@@ -31,8 +31,8 @@ export default function Edit(props) {
 		colleague.gender = gender;
 		localStorage.setItem('project01', JSON.stringify(colleagueList));
 		window.location.replace('/list');
-		//props.updateListState();
 	}
+
 	return (
 		<>
 			<Box component="form" onSubmit={editEntry} noValidate autoComplete="off">
@@ -81,7 +81,7 @@ export default function Edit(props) {
 						<FormLabel component="legend">Gender</FormLabel>
 						<RadioGroup
 							aria-label="gender"
-							defaultValue={gender}
+							value={gender}
 							name="radio-buttons-group"
 						>
 							<FormControlLabel
@@ -114,7 +114,9 @@ export default function Edit(props) {
 							variant="contained"
 							color="error"
 							type="button"
-							onClick={() => window.location.replace('/list')}
+							onClick={() => {
+								props.setEditToggled(undefined);
+							}}
 						>
 							<Typography variant="button">Cancel</Typography>
 						</Button>
